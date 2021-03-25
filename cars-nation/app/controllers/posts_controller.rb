@@ -7,7 +7,7 @@ class PostsController < ApplicationController
          #attach the posts model so we can view all from double
     redirect_if_not_logged_in
     if params[:query]
-        @posts = Post.search(params[:query.].capitalize)
+        @posts = Post.search(params[:query].capitalize)
     else
         @posts = Post.all.reverse_posts.
         #render all the posts
@@ -57,6 +57,36 @@ class PostsController < ApplicationController
         flash[:error] = "You are not authorized to edit this post!"
         redirect "/posts/#{@post.id}"
         end
+     end
+
+      #Use PATCH method here.. 
+    patch '/posts/:id' do 
+        find_post
+        @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
+        redirect "/posts/#{@post.id}"
     end
 
+    #Delete
+    #Delete the post - as well as the existing route
+    delete '/posts/:id' do
+        #gotta find the post we want to Delete
+        find_post
+        if authorized_to_edit?(@post)
+        @post.destroy
+        flash[:message] = "Post deleted successfully!"
+        redirect '/posts'
+        else
+            flash[:error] = "You are not authorized to delete this post!"
+            redirect "/posts/#{@post.id}"
+        end
+    end
+
+    private
+
+    #only using internally, call with public method
+    def find_post
+        @post = Post.find_by_id(params[:id])
+    end
+end
+end
 
