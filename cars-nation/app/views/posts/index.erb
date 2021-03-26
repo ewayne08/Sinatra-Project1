@@ -1,0 +1,22 @@
+<h1 style="color:#b39ddb;"> All Posts </h1>
+
+<form action="/posts" method="get">
+  <input type="text" name="query"  placeholder="Enter Search">
+  <input type="submit" value="Search">
+  <div class="row" style="margin-bottom: 0;">
+    <div class="col s5 input-field" style="margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;">
+  </div>
+  </div>
+</form>
+
+
+<h6>Logged in user: <%= current_user.username %> </h6>
+
+<% @posts.each do |post| %>
+    <h4><a href="/posts/ <%= post.id %>"><%= post.title %></a></h4>
+    <img src="<%= post.image_url %>" alt="<%= post.title %>" height="200" width="200">
+    <br><br>
+    <strong>Created at: <%= post.created_at %></strong>
+    <p><%= post.description %></p>
+    <p>Posted By: <%= post.user.username %></p>
+<% end %>
