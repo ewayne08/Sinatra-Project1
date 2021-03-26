@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 
     validates :title, :description, :image_url, presence: true
 
-    def 
-        
+    def self.reverse_posts
+        Post.order(:created_at).reverse_order
     end
+end
