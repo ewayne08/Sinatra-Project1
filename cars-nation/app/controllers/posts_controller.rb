@@ -1,10 +1,13 @@
 class PostsController < ApplicationController
 
-    #buidling out CRUD
-
+    
+    
+    #BUILDING OUT CRUD
+    
+    
     #Read - showing all posts
     get '/posts' do
-         #attach the posts model so we can view all from double
+    #attach the posts model so we can view all from double
     redirect_if_not_logged_in
     if params[:query]
         @posts = Post.search(params[:query].capitalize)
@@ -15,36 +18,37 @@ class PostsController < ApplicationController
         @post  = Post.find_by_id(session[:id])
         erb :'posts/index'
     end
-
-    #Create- render a form for user to create a new post
+    
+    #Create - render a form for user to create a new post
     get '/posts/new' do
         redirect_if_not_logged_in
         erb :'posts/new'
     end
 
     post '/posts' do
-        #recieves params user inputs to create new post
+        #receives params user inputs to create new post
         post = Post.new(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
         if post.save
         #^ .save triggers active record validations
         #success message
         flash[:message] = "Post created successfully!"
-         # after creating post, redirect to post show page
-         redirect "/posts/#{post.id}"
+        # after creating post, redirect to post show page
+        redirect "/posts/#{post.id}"
         else
             #error message using active record supplied messaging
             flash[:error] = "Unable to create post: #{post.errors.full_messages.to_sentence}"
             redirect "posts/new"
-           end
-       end
+        end
+    end
 
 
-       #To display a single post
+    #To display a single post
     get '/posts/:id' do
         find_post
         erb :'/posts/show'
     end
 
+ 
     #Update
     #Edit button that takes us to form
     #Render form to edit post
@@ -57,15 +61,15 @@ class PostsController < ApplicationController
         flash[:error] = "You are not authorized to edit this post!"
         redirect "/posts/#{@post.id}"
         end
-     end
-
-      #Use PATCH method here.. 
+    end
+   
+    #Use PATCH method here.. 
     patch '/posts/:id' do 
         find_post
         @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
         redirect "/posts/#{@post.id}"
     end
-
+    
     #Delete
     #Delete the post - as well as the existing route
     delete '/posts/:id' do
@@ -80,13 +84,14 @@ class PostsController < ApplicationController
             redirect "/posts/#{@post.id}"
         end
     end
-
-    private
+    
+    
+     private
 
     #only using internally, call with public method
     def find_post
         @post = Post.find_by_id(params[:id])
     end
-end
+  end
 end
 

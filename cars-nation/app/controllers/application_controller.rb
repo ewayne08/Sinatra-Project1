@@ -5,8 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-  end
-  enable :sessions
+    # enables sessions hash
+    enable :sessions
     # set session secret(encryption key) for additional layer of security
     set :session_secret, "secret_session"
     # registering flash gem to enable use of "messaging"
@@ -32,6 +32,7 @@ class ApplicationController < Sinatra::Base
     def current_user #memoization / making it so we don't hit the db over & over
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
+  end
 
     #authorization helper for editing & deleting posts
     def authorized_to_edit?(post)
