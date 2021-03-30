@@ -7,6 +7,7 @@
     <title>Cars CarsNation</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="stylesheet" type="text/css" href="stylesheets/main.css"/>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -16,14 +17,14 @@
   </head>
   <body class="grey darken-3">
     <nav>
-    <div class="nav-wrapper lime darken-4">
+    <div class="ethan">
       <a href="/" class="brand-logo black-text">CarsNation</a>
       <ul id="nav-mobile" class="right">
        <% if logged_in? %>
-          <li><a class="black-text" href="/posts">All Posts</a></li>
-          <li><a class="black-text" href="/posts/new">Create New Post</a></li>
-          <li><a class="black-text" href="/users/<%=@current_user.id%>">My Posts</a></li>
-          <li><a class="black-text" href="/logout">Log Out</a></li>
+          <li><a class="white-text" href="/posts">All Posts</a></li>
+          <li><a class="white-text" href="/posts/new">Create New Post</a></li>
+          <li><a class="white-text" href="/users/<%=@current_user.id%>">My Posts</a></li>
+          <li><a class="white-text" href="/logout">Log Out</a></li>
         <% end %> 
       </ul>
     </div>
@@ -42,7 +43,7 @@
 
       <%= yield %>
     </div>
-    <img src="/images/wave.svg" style="margin: 0; padding: 0;">
+    
    
     
     
