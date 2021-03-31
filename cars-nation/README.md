@@ -1,1 +1,1 @@
-
+Welcome to Cars Nation! You can start by running "bundle install" in your terminal. Once you have done that run shotgun. Shotgun will give you a local host to access the program. Once you type in the local host in your search bar and have reached the page create an account, unless you have one already. You can now view other peoples posts, create your own, update your posts, and delete your posts. This is a page for the car community, and displays some of the top car enthusiasts collections. Time to go post!! 
