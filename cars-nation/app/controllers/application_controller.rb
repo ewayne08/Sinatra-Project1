@@ -16,9 +16,9 @@ class ApplicationController < Sinatra::Base
   #this will keep track of the logged in user
   get '/' do
     if logged_in?
-      redirect "/users/#{current_user.id}"
+      redirect "/users/#{current_user.id}" #redirect (new page)
     else
-    erb :welcome
+    erb :welcome #render(shows page as is)
     end
   end
   
